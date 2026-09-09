@@ -1,0 +1,12 @@
+node_modules/
+.output/
+.vercel/
+.tanstack/
+dist/
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
+*.tsbuildinfo
+lighthouse-report.*

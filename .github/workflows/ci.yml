@@ -1,0 +1,29 @@
+name: Check template
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      # Building first also regenerates the typed route tree.
+      - run: bun run build
+      - run: bun run typecheck
+      - run: bun run test
+      - name: Verify Vercel build output
+        run: bun run build
+        env:
+          NITRO_PRESET: vercel
