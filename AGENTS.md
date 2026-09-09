@@ -12,6 +12,7 @@
 - Use Vercel Blob only for files over 100 MB. Smaller static assets can stay in the project; user uploads and private data must not be committed.
 - Optimize for [Google PageSpeed Insights](https://pagespeed.web.dev/). Check the deployed URL; do not assume scores.
 - Maximize SEO when building: semantic HTML, useful content, unique metadata, canonical URLs, crawlable links, sitemaps, appropriate structured data, and correct indexing rules.
+- Create and maintain `/llms.txt` (a concise Markdown overview with links) and `/llms-full.txt` (expanded public content), served from the site root and kept in sync with the website.
 - Use a beautiful, minimalistic, responsive, and accessible design.
 - Always follow the global design language. Use shared styles, tokens, and components; do not make ad hoc changes in individual places.
 - Use shadcn/ui for all UI components, styled through the shared global theme.
