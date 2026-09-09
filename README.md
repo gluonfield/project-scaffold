@@ -31,6 +31,8 @@ but using Bun to install dependencies does not enable it automatically.
 - `src/components/ui/`: shadcn/ui component source; `components.json` configures the CLI.
 - `src/assets/`: bundled Sora font and its `OFL.txt` license; keep the license.
 - `public/favicon.svg`: product mark.
+- `content/llms/`: public page content; keep it aligned with the app when adapting the scaffold.
+- `scripts/generate-llms.ts`: site details and page map for `@agentmarkup/core`, which generates `public/llms.txt` (overview/link index) and `public/llms-full.txt` (expanded content).
 - `AGENTS.md`: concise development rules.
 
 Use shadcn/ui for standard components. Button, Badge, Card, Dropdown Menu, and
@@ -48,6 +50,14 @@ Copy `.env.example` to `.env` and set `VITE_SITE_URL` to your production origin.
 This public build-time variable controls canonical and `og:url` tags, which are
 omitted when it is unset. Set it in Vercel before building and redeploy after
 changes. Never put secrets in `VITE_` variables.
+
+The LLM-readable files are served at `/llms.txt` and `/llms-full.txt`; generated
+outputs are gitignored. They refresh at each dev startup and production build.
+After editing their content during development, run `bun run generate:llms development`
+or restart dev. `bun run generate:llms` regenerates them with production settings.
+Their links use `VITE_SITE_URL`, then Vercel's production/deployment hostname when
+available, with `localhost:3000` as the local fallback. Set `VITE_SITE_URL` for
+your canonical production origin.
 
 The sample has no database, authentication, analytics, or external font requests.
 Add services only when needed. Use PostgreSQL through Neon in the Vercel

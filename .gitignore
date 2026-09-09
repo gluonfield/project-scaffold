@@ -10,3 +10,5 @@ dist/
 .DS_Store
 *.tsbuildinfo
 lighthouse-report.*
+public/llms.txt
+public/llms-full.txt

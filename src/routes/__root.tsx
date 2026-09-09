@@ -31,6 +31,7 @@ export const Route = createRootRoute({
         crossOrigin: 'anonymous',
       },
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+      { rel: 'describedby', type: 'text/plain', href: '/llms.txt' },
     ],
   }),
   shellComponent: RootDocument,
