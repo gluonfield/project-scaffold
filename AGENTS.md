@@ -10,6 +10,7 @@
 - If a database is needed, use PostgreSQL through Neon in the Vercel Marketplace.
 - Use Vercel Blob only for files over 100 MB. Smaller static assets can stay in the project; user uploads and private data must not be committed.
 - Optimize for [Google PageSpeed Insights](https://pagespeed.web.dev/). Check the deployed URL; do not assume scores.
+- Maximize SEO when building: semantic HTML, useful content, unique metadata, canonical URLs, crawlable links, sitemaps, appropriate structured data, and correct indexing rules.
 - Use a beautiful, minimalistic, responsive, and accessible design.
 - Always follow the global design language. Use shared styles, tokens, and components; do not make ad hoc changes in individual places.
 - Use shadcn/ui for all UI components, styled through the shared global theme.
