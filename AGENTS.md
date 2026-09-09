@@ -5,6 +5,7 @@
 - Use Bun for dependencies and scripts. Commit `bun.lock`.
 - Keep pages server-rendered and fast.
 - Deploy to Vercel through Nitro. Bun manages packages and scripts; the current server runtime is Node.js 24.
+- Use Vercel Functions for backend logic, including form submissions through TanStack server functions. Keep validation and secrets on the server.
 - When starting a new project, create a **private GitHub repository** using GitHub CLI.
 - Use **Vercel CLI** to create/link the corresponding Vercel project and connect it to the GitHub repository for deployments.
 - If a database is needed, use PostgreSQL through Neon in the Vercel Marketplace.
