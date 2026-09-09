@@ -57,16 +57,24 @@ test('home content and metadata are in the initial HTML, without JavaScript', as
   const html = await response.text()
   const main = html.match(/<main[\s\S]*?<\/main>/)?.[0]
   assert.ok(main, 'Server must render a main landmark')
-  assert.match(main, /Good things/)
-  assert.match(main, /Fast from the first visit/)
-  assert.match(main, /href="\/about"/)
+  assert.match(
+    main,
+    /<h1[^>]*>Status updates your team will actually read\.<\/h1>/,
+  )
+  assert.match(main, /Your morning, caught up\./)
+  assert.match(main, /The new homepage is live\./)
+  assert.match(main, /href="\/demo"/)
   assert.match(html, /<html lang="en"/)
-  assert.match(html, /<title>Scaffolding \| A place to begin<\/title>/)
+  assert.match(html, /<title>Relay \| Status updates worth reading<\/title>/)
+  assert.match(html, /name="description" content="[^"]*Relay/)
   assert.match(
     html,
-    /name="description" content="A small, considered foundation/,
+    /property="og:title" content="Relay \| Status updates worth reading"/,
   )
-  assert.match(html, /property="og:title"/)
+  assert.doesNotMatch(
+    html,
+    /<a\b[^>]*href="https?:\/\/(?:www\.)?(?:vercel\.com|tanstack\.com)/,
+  )
 
   const cssPath = html.match(
     /<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"/,
@@ -75,23 +83,37 @@ test('home content and metadata are in the initial HTML, without JavaScript', as
   const css = await fetch(new URL(cssPath, origin))
   assert.equal(css.status, 200)
   assert.match(css.headers.get('content-type'), /text\/css/)
+
+  const fontPath = html.match(/<link[^>]*as="font"[^>]*href="([^"]+)"/)?.[1]
+  assert.ok(fontPath, 'Local font must be preloaded in server-rendered HTML')
+  const fontUrl = new URL(fontPath, origin)
+  assert.equal(fontUrl.origin, origin)
+  const font = await fetch(fontUrl)
+  assert.equal(font.status, 200)
+  assert.match(font.headers.get('content-type'), /font\/woff2/)
 })
 
-test('the second page supports direct requests with its own title and content', async () => {
-  const response = await fetch(`${origin}/about`)
+test('the demo renders its form and sample digest on a direct request', async () => {
+  const response = await fetch(`${origin}/demo`)
   assert.equal(response.status, 200)
   const html = await response.text()
-  assert.match(html, /<title>The guide \| Scaffolding<\/title>/)
-  assert.match(html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? '', /Start locally/)
-  assert.match(html, /bun install/)
+  assert.match(html, /<title>Try Relay \| A calmer way to catch up<\/title>/)
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? ''
+  assert.match(main, /One small update\.<br\s*\/>Everyone caught up\./)
+  assert.match(main, /<textarea[^>]*name="update"/)
+  assert.match(main, /<fieldset disabled=""/)
+  assert.match(main, /Your morning, caught up\./)
+  assert.match(main, /Waiting on the final design review/)
+  assert.match(main, /<noscript>/)
 })
 
 test('unknown URLs return a real 404 with a recovery link', async () => {
   const response = await fetch(`${origin}/this-page-does-not-exist`)
   assert.equal(response.status, 404)
   const html = await response.text()
-  assert.match(html, /Nothing here/)
-  assert.match(html, /Return to overview/)
+  assert.match(html, /Page not found \| Relay/)
+  assert.match(html, /Let’s get you back on track/)
+  assert.match(html, /Return to Relay/)
   assert.match(html, /name="robots" content="noindex"/)
 })
 

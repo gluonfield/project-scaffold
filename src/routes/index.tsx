@@ -1,175 +1,108 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Arrow } from '../components/arrow'
+import { Clock3, Layers3, Users } from 'lucide-react'
+import { DigestPreview } from '../components/digest-preview'
+import { Button } from '../components/ui/button'
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../components/ui/card'
 import { pageMeta, site } from '../lib/site'
 
 export const Route = createFileRoute('/')({
-  head: () => pageMeta('Scaffolding | A place to begin', site.description, '/'),
+  head: () =>
+    pageMeta('Relay | Status updates worth reading', site.description, '/'),
   component: Home,
 })
 
 function Home() {
   return (
     <main id="main-content">
-      <section className="hero wrap" aria-labelledby="hero-heading">
-        <div className="hero-copy">
-          <p className="eyebrow">
-            <span className="small-mark" />A considered starting point
-          </p>
+      <section
+        className="hero-section page-container"
+        aria-labelledby="hero-heading"
+      >
+        <div className="hero panel panel-mint">
           <h1 id="hero-heading">
-            Good things
-            <br />
-            start <span>simple.</span>
+            Status updates your team will actually read.
           </h1>
           <p className="hero-description">
-            A little structure for your next big idea. Thoughtfully designed,
-            fast from the first page, and ready to make your own.
+            Relay collects what everyone shipped, what’s blocked, and what’s
+            next into one short daily digest. No meetings, no digging through
+            channels.
           </p>
-          <div className="hero-actions">
-            <Link className="button button-primary" to="/about">
-              Explore the guide <Arrow />
-            </Link>
-            <a className="text-link" href="#foundation">
-              See what’s inside <span aria-hidden="true">↓</span>
-            </a>
+          <div className="button-group">
+            <Button asChild size="lg">
+              <Link to="/demo">Start free</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href="#product">See how it works</a>
+            </Button>
           </div>
-          <p className="hero-note">
-            TanStack Start <span aria-hidden="true">/</span> React{' '}
-            <span aria-hidden="true">/</span> TypeScript
-          </p>
-        </div>
-        <div className="illustration" aria-hidden="true">
-          <div className="drawing-caption">
-            <span>A foundation, open to possibility.</span>
-            <span>Fig. A</span>
-          </div>
-          <svg
-            className="structure"
-            viewBox="0 0 440 400"
-            fill="none"
-            aria-hidden="true"
-          >
-            <g className="construction-lines">
-              <path d="M25 260 220 147l195 113-195 113L25 260Z" />
-              <path d="m25 160 195-113 195 113M220 22v365M50 65v235M390 65v235" />
-              <path d="m25 310 195-113 195 113M25 210 195 97l195 113" />
-            </g>
-            <g className="foundation-shape">
-              <path
-                className="shape-side"
-                d="m85 233 135 78 135-78v30l-135 78-135-78v-30Z"
-              />
-              <path
-                className="shape-top"
-                d="m85 233 135-78 135 78-135 78-135-78Z"
-              />
-              <path className="shape-edge" d="M220 311v30" />
-            </g>
-            <g className="middle-shape">
-              <path
-                className="shape-side"
-                d="m85 178 135 78 135-78v30l-135 78-135-78v-30Z"
-              />
-              <path
-                className="shape-top"
-                d="m85 178 135-78 135 78-135 78-135-78Z"
-              />
-              <path className="shape-edge" d="M220 256v30" />
-            </g>
-            <g className="top-shape">
-              <path
-                className="shape-side"
-                d="m85 113 135 78 135-78v30l-135 78-135-78v-30Z"
-              />
-              <path
-                className="shape-top"
-                d="m85 113 135-78 135 78-135 78-135-78Z"
-              />
-              <path className="shape-edge" d="M220 191v30" />
-              <path
-                className="shape-detail"
-                d="m153 113 67-39 67 39-67 39-67-39Z"
-              />
-            </g>
-            <g className="drawing-points">
-              <circle cx="50" cy="65" r="3" />
-              <circle cx="390" cy="300" r="3" />
-              <circle cx="220" cy="373" r="3" />
-            </g>
-          </svg>
-          <div className="drawing-bottom">
-            <span className="drawing-cross">+</span>
-            <span>Build on something good.</span>
-            <span className="drawing-cross">+</span>
+          <div className="hero-preview">
+            <DigestPreview />
           </div>
         </div>
       </section>
 
-      <section
-        id="foundation"
-        className="foundation wrap"
-        aria-labelledby="foundation-heading"
-      >
-        <div className="section-intro">
-          <h2 id="foundation-heading">
-            The essentials.
-            <br />
-            Already in place.
-          </h2>
-          <p>
-            A small foundation that leaves space for what makes your project
-            yours.
-          </p>
-        </div>
-        <div className="feature-list">
-          <article>
-            <span className="feature-symbol" aria-hidden="true">
-              ↗
-            </span>
-            <div>
-              <h3>Fast from the first visit</h3>
-              <p>
-                Server-rendered pages, lightweight styles, and no waiting for
-                JavaScript to read the page.
-              </p>
-            </div>
-            <span className="feature-tag">Performance</span>
-          </article>
-          <article>
-            <span className="feature-symbol" aria-hidden="true">
-              ⊞
-            </span>
-            <div>
-              <h3>Easy to make your own</h3>
-              <p>
-                Clear routes, a few shared components, and a simple visual
-                system you can change in one place.
-              </p>
-            </div>
-            <span className="feature-tag">Simplicity</span>
-          </article>
-          <article>
-            <span className="feature-symbol" aria-hidden="true">
-              ↑
-            </span>
-            <div>
-              <h3>A clear path to launch</h3>
-              <p>
-                Keep your code on GitHub. Connect it to Vercel. Give your next
-                idea a home.
-              </p>
-            </div>
-            <span className="feature-tag">Deployment</span>
-          </article>
-        </div>
+      <section className="benefits page-container" aria-label="Why Relay">
+        {[
+          {
+            icon: Clock3,
+            title: 'Async by default',
+            description:
+              'Post an update in under a minute, whenever it fits your day.',
+          },
+          {
+            icon: Layers3,
+            title: 'One daily digest',
+            description:
+              'A single morning summary, grouped by project. Fewer pings, more clarity.',
+          },
+          {
+            icon: Users,
+            title: 'Stay in sync',
+            description:
+              'A shared view of progress, wherever your team’s day takes them.',
+          },
+        ].map(({ icon: Icon, title, description }) => (
+          <Card key={title}>
+            <CardHeader>
+              <span className="feature-icon">
+                <Icon size={20} aria-hidden="true" />
+              </span>
+              <CardTitle role="heading" aria-level={2}>
+                {title}
+              </CardTitle>
+              <CardDescription>{description}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
       </section>
-      <section className="closing wrap" aria-labelledby="closing-heading">
-        <div>
-          <p>From here, it’s yours.</p>
-          <h2 id="closing-heading">What will you make?</h2>
+
+      <section
+        id="product"
+        className="product-section page-container"
+        aria-labelledby="product-heading"
+      >
+        <div className="product-tour panel">
+          <div className="section-copy">
+            <h2 id="product-heading">See what changed, not what’s noisy.</h2>
+            <p>
+              Relay groups updates by project and flags blockers, so leads know
+              where to step in before standup would have happened.
+            </p>
+            <Button asChild variant="secondary">
+              <Link to="/demo" hash="guide">
+                Read the product tour
+              </Link>
+            </Button>
+          </div>
+          <div className="tour-preview">
+            <DigestPreview compact />
+          </div>
         </div>
-        <Link className="button button-secondary" to="/about">
-          Find your starting point <Arrow />
-        </Link>
       </section>
     </main>
   )

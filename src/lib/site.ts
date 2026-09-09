@@ -1,7 +1,7 @@
 export const site = {
-  name: 'Scaffolding',
+  name: 'Relay',
   description:
-    'A small, considered foundation for your next project. Built with TanStack Start, made to be yours.',
+    'Relay collects what everyone shipped, what is blocked, and what is next into one short daily digest.',
   url: import.meta.env.VITE_SITE_URL as string | undefined,
 }
 

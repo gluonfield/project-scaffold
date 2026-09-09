@@ -6,7 +6,11 @@ import {
   Scripts,
 } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
+import soraFont from '../assets/sora-latin.woff2?url'
+import { SiteFooter } from '../components/site-footer'
 import { SiteHeader } from '../components/site-header'
+import { Badge } from '../components/ui/badge'
+import { Button } from '../components/ui/button'
 import { site } from '../lib/site'
 import stylesheet from '../styles.css?url'
 
@@ -15,10 +19,17 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#ffffff' },
+      { name: 'theme-color', content: '#f7f8fa' },
     ],
     links: [
       { rel: 'stylesheet', href: stylesheet },
+      {
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
+        href: soraFont,
+        crossOrigin: 'anonymous',
+      },
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     ],
   }),
@@ -26,13 +37,14 @@ export const Route = createRootRoute({
   component: Outlet,
   notFoundComponent: NotFound,
   errorComponent: () => (
-    <main id="main-content" className="wrap message-page">
-      <p className="eyebrow">Something went wrong</p>
-      <h1>Let’s try that again.</h1>
-      <p>The page couldn’t load. Please refresh to give it another try.</p>
-      <a className="button button-primary" href="/">
-        Return to overview
-      </a>
+    <main id="main-content" className="page-container message-page">
+      <div className="panel">
+        <h1>Let’s try that again.</h1>
+        <p>The page couldn’t load. Please refresh to give it another try.</p>
+        <Button asChild>
+          <a href="/">Return to Relay</a>
+        </Button>
+      </div>
     </main>
   ),
 })
@@ -49,15 +61,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         </a>
         <SiteHeader />
         {children}
-        <footer className="site-footer wrap">
-          <Link className="footer-name" to="/">
-            {site.name}.
-          </Link>
-          <p>A little structure. A lot of possibility.</p>
-          <a href="https://vercel.com/docs/frameworks/full-stack/tanstack-start">
-            Made for Vercel <span aria-hidden="true">↗</span>
-          </a>
-        </footer>
+        <SiteFooter />
         <Scripts />
       </body>
     </html>
@@ -66,15 +70,18 @@ function RootDocument({ children }: { children: ReactNode }) {
 
 function NotFound() {
   return (
-    <main id="main-content" className="wrap message-page">
-      <title>Page not found | Scaffolding</title>
+    <main id="main-content" className="page-container message-page">
+      <title>{`Page not found | ${site.name}`}</title>
       <meta name="robots" content="noindex" />
-      <p className="eyebrow">404 / A small detour</p>
-      <h1>Nothing here. Yet.</h1>
-      <p>This page doesn’t exist. There’s a good place to start just below.</p>
-      <Link className="button button-primary" to="/">
-        Return to overview
-      </Link>
+      <div className="panel">
+        <Badge variant="secondary">404</Badge>
+        <p>This page doesn’t exist.</p>
+        <h1>Let’s get you back on track.</h1>
+        <p>Your team’s updates are a good place to start.</p>
+        <Button asChild>
+          <Link to="/">Return to Relay</Link>
+        </Button>
+      </div>
     </main>
   )
 }
