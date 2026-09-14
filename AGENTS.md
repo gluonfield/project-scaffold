@@ -8,6 +8,7 @@
 - Use Vercel Functions for backend logic, including form submissions through TanStack server functions. Keep validation and secrets on the server.
 - When starting a new project, create a **private GitHub repository** using GitHub CLI.
 - Use **Vercel CLI** to create/link the corresponding Vercel project and connect it to the GitHub repository for deployments.
+- Agents must work directly on the `main` branch.
 - Commit all project changes to Git and push to the remote periodically while working, at meaningful milestones and before finishing.
 - If a database is needed, use PostgreSQL through Neon in the Vercel Marketplace.
 - Use Vercel Blob only for files over 100 MB. Smaller static assets can stay in the project; user uploads and private data must not be committed.
